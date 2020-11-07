@@ -5,6 +5,7 @@ const form = document.querySelector(".js-form"),
 const USER_LS = "currentUser",
       SHOWING_CN = "showing";
 
+
 function saveName(text){
     localStorage.setItem(USER_LS, text);
 }
@@ -22,9 +23,13 @@ function askForName(){
 }
 
 function paintGreeting(text){
+    const span = document.createElement("span");
+    
     form.classList.remove(SHOWING_CN);
     greeting.classList.add(SHOWING_CN);
-    greeting.innerText = `Hello ${text}`;
+    
+    span.innerText = `Hello ${text}`;
+    greeting.append(span);
 }
 
 function loadName(){
