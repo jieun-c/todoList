@@ -2,17 +2,20 @@ header{
     position: fixed;
     width: 100%;
 }
+header > .clock{
+    text-align: right;
+}
 header > .clock > h1{
     font-size: 1.3rem;
     font-weight: lighter;
     letter-spacing: 2px;
     padding: 10px 30px;
 }
-header > .greetings{
-    position: absolute;
-    top: 0; right: 0;
-    padding: 20px 30px;
-    font-size: 1.3rem;
+header > .clock > h3{
+    font-size: 0.8rem;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    padding: 10px 30px 0;
 }
 
 footer > .weather{
@@ -25,12 +28,16 @@ main{
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    padding: 50px 20px;
+    padding: 30px;
     box-sizing: border-box;
-    background-color: rgba(0,0,0,0.5);
-    
-    width: 527px;
-    max-width: 80%;
+    width: 95vw;
+    height: calc(90vh - 80px - 60px);
+}
+main > .greetings{
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: lighter;
+    margin-bottom: 50px;
 }
 main > form > input{
     background-color: rgba(0,0,0,0);
@@ -38,13 +45,14 @@ main > form > input{
     border: none;
     border-bottom: 2px solid white;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     transition: all 0.3s ease-out;
+    width: 100%;
+    max-width: 600px;
     
     display: block;
     margin: 0 auto;
 }
-
 
 /*포커스 테두리 없애기*/
 main > form > input:focus{
@@ -55,13 +63,19 @@ main > form > input:focus{
 /*포커스 시 placeholder 감추기*/
 main > form > input:focus::placeholder{
     color: transparent;
+    font-size: 0.5rem;
 }
 
 /*placeholder 색상 변경법*/
 main > form > input::placeholder{
     color: white;
+    font-size: 1rem;
+    letter-spacing: 2px;
 }
 
+main > .toDoList{
+    padding: 30px 0;
+}
 main > .toDoList > li{
     padding-top: 15px;
 }
@@ -81,6 +95,13 @@ main > .toDoList > li{
 @media (max-width: 767.98px) {
     main > form > input{
         font-size: 5vw;
+    }
+    main > .greetings{
+        font-size: 5vw;
+    }
+    main > form > input::placeholder{
+        letter-spacing: inherit;
+        font-size: inherit;
     }
 }
 

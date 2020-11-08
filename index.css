@@ -4,12 +4,16 @@ body{
     color: white;
 }
 
-.form, .greetings{
-    display: none;
+.form, .greetings, .toDoForm, .toDoList{
+    opacity: 0;
+    transition: 0.5s;
+    height: 0;
 }
 
 .showing{
-    display: block;
+    opacity: 1;
+    transform: translateX(0);
+    height: auto;
 }
 
 
@@ -30,4 +34,9 @@ body{
     min-height: 100%;
     z-index: -1;
     animation: fadeIn 0.5s linear;
+}
+
+button{
+    background-color: rgba(0,0,0,0);
+    border: 0;
 }

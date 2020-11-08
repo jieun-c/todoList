@@ -5,7 +5,13 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 const TODOS_LS = "toDos";
 let toDos = [];
 let idNumbers = 1;
+let ready = "ready";
 
+function saveToDos(){
+    //JS에서 local storage에 있는 모든 데이터를 string으로 저장하려함.
+    //JSON 사용으로 JS OBJ을 String으로 바꿔줌
+    localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
+}
 
 function deleteToDo(event){
     const btn = event.target;
@@ -21,34 +27,55 @@ function deleteToDo(event){
     saveToDos();
 }
 
-function saveToDos(){
-    //JS에서 local storage에 있는 모든 데이터를 string으로 저장하려함.
-    //JSON 사용으로 JS OBJ을 String으로 바꿔줌
-    localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
+/*
+function isChecked(){
+    const target = event.target;
+    if(target.checked){
+        ready = "finished";
+    }else{
+        ready = "ready";
+    }
+    
+    if()
+    
+    saveToDos();
 }
+*/
 
 function paintToDo(text){
     const li = document.createElement("li");
-    const delBtn = document.createElement("button");
+    const check = document.createElement("input");
     const span = document.createElement("span");
-    const newId = idNumbers;
+    const delBtn = document.createElement("button");
+    
+    check.setAttribute("type", "checkbox");
     delBtn.innerText = "❌";
     
     delBtn.addEventListener("click",deleteToDo);
     
     span.innerText = text;
-    li.appendChild(delBtn);
+    li.appendChild(check);
     li.appendChild(span);
-    li.id = newId;
+    li.appendChild(delBtn);
+    li.id = idNumbers;
     toDoList.appendChild(li);
     
-    const toDoObj = {
-        text: text,
-        id: newId
-    }
-    toDos.push(toDoObj);
+    //check.addEventListener("click", isChecked);
+    
+    toDos.push(handleObj(text));
     saveToDos();
+}
+
+function handleObj(text){
+    const toDoObj = {
+        id: idNumbers,
+        text: text,
+        status: ready
+    }
+    
     idNumbers += 1;
+    
+    return toDoObj;
 }
 
 function handleSubmit(event){

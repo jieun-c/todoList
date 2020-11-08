@@ -15,6 +15,7 @@ function handleSubmit(event){
     const currentValue = input.value;
     paintGreeting(currentValue);
     saveName(currentValue);
+    loadIndex();
 }
 
 function askForName(){
@@ -23,13 +24,12 @@ function askForName(){
 }
 
 function paintGreeting(text){
-    const span = document.createElement("span");
-    
     form.classList.remove(SHOWING_CN);
     greeting.classList.add(SHOWING_CN);
     
-    span.innerText = `Hello ${text}`;
-    greeting.append(span);
+    greeting.innerText = 
+        `Hello, ${text}
+        What is your main focus for today?`;
 }
 
 function loadName(){
