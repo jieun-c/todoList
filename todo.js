@@ -5,7 +5,7 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 const TODOS_LS = "toDos";
 let toDos = [];
 let idNumbers = 1;
-let ready = "ready";
+let currentText = "";
 
 function saveToDos(){
     //JS에서 local storage에 있는 모든 데이터를 string으로 저장하려함.
@@ -27,23 +27,31 @@ function deleteToDo(event){
     saveToDos();
 }
 
-/*
-function isChecked(){
-    const target = event.target;
-    if(target.checked){
-        ready = "finished";
-    }else{
-        ready = "ready";
-    }
+function isChecked(event){
+    const chkBtn = event.target;
+    const li = chkBtn.parentNode.parentNode;
     
-    if()
+    
+    toDos.forEach(function(ele){
+        if(chkBtn.checked){
+            toDos[getChildNumber(li)].status = "finished";
+            li.classList.add("toDoDone");
+        }else{
+            toDos[getChildNumber(li)].status = "ready";
+            li.classList.remove("toDoDone");
+        }
+    });
     
     saveToDos();
 }
-*/
+
+function getChildNumber(node) {
+  return [].indexOf.call(node.parentNode.children, node);
+}
 
 function paintToDo(text){
     const li = document.createElement("li");
+    const label = document.createElement("label");
     const check = document.createElement("input");
     const span = document.createElement("span");
     const delBtn = document.createElement("button");
@@ -54,27 +62,27 @@ function paintToDo(text){
     delBtn.addEventListener("click",deleteToDo);
     
     span.innerText = text;
-    li.appendChild(check);
-    li.appendChild(span);
+    li.appendChild(label);
     li.appendChild(delBtn);
+    label.appendChild(check);
+    label.appendChild(span);
     li.id = idNumbers;
     toDoList.appendChild(li);
+
+    check.addEventListener("click", isChecked);
     
-    //check.addEventListener("click", isChecked);
-    
-    toDos.push(handleObj(text));
+    currentText = text;
+    toDos.push(handleObj());
     saveToDos();
 }
 
-function handleObj(text){
+function handleObj(){
     const toDoObj = {
         id: idNumbers,
-        text: text,
-        status: ready
-    }
-    
+        text: currentText,
+        status: "ready"
+    };
     idNumbers += 1;
-    
     return toDoObj;
 }
 

@@ -34,9 +34,14 @@ body{
     min-height: 100%;
     z-index: -1;
     animation: fadeIn 0.5s linear;
+    filter: brightness(70%);
 }
 
 button{
     background-color: rgba(0,0,0,0);
     border: 0;
+}
+
+.toDoDone{
+    text-decoration: line-through;
 }
